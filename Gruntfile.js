@@ -4,9 +4,14 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         clean: {
-            output: ['dist/*']
+            // output: ['dist/*']
+            options: {},
+            files: ['./dist/*'],
+            // './dist/*' keeps dist folder, 
+            // './dist/**' removes dist folder
+            folders: ['./dist/es6', './dist/ts'] // redundant way to delete folders
         },
-
+ 
         babel: {
             options: {
                 sourceMap: true,
@@ -55,7 +60,11 @@ module.exports = function(grunt) {
                 }]
             },
             options: {
-                
+                mangle: true, // false to toggle to keep original var names
+                compress: {
+                    drop_console: false // would remove console's in code, but we should remove them manually
+                },
+                beautify: false // set to true to reverse uglify
             }
         },
 
@@ -112,6 +121,8 @@ module.exports = function(grunt) {
     grunt.registerTask('ts', ['typescript']);
     grunt.registerTask('ccat', ['concat']);
     grunt.registerTask('ugg', ['uglify']);
+    // make sure uglify has files into uglify, via typescript and babel
+    grunt.registerTask('minify', ['clean', 'typescript', 'babel', 'uglify']);
     
     grunt.registerTask('default', ['clean', 'typescript', 'babel', 'jshint', 'uglify']); // called with grunt || grunt clean
 
