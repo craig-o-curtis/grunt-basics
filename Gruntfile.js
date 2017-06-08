@@ -104,6 +104,42 @@ module.exports = function(grunt) {
                 },
                 src: ['./src/**/*.js']
             }
+        },
+
+        htmlmin: {
+            dist: {
+                options: {
+                    removeComments: false,
+                    collapseWhitespace: true
+                },
+                files: {
+                    './dist/index.html': './.src/**/index.html',
+                }
+            },
+            dev: {
+                files: [{
+                    expand: true,
+                    cwd: './src',
+                    src: ['./src/**.*.html', '*.html'],
+                    dest: './dist'
+                    // './dist/index.html': './src/index.html'
+                }]
+            }
+        },
+
+        htmlhint: {
+
+        },
+
+        less: {
+            development: {
+                options: {
+                    paths: ['./src/less']
+                },
+                files: {
+                    './dist/styles/bundle.css': './src/less/**/*.less'
+                }
+            }
         }
 
     });
@@ -113,7 +149,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-typescript');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify'); 
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-contrib-less');
     // must be name of specified plugin property 
     
     // grunt.registerTask('typescript');
@@ -121,6 +159,7 @@ module.exports = function(grunt) {
     grunt.registerTask('ts', ['typescript']);
     grunt.registerTask('ccat', ['concat']);
     grunt.registerTask('ugg', ['uglify']);
+    grunt.registerTask('tempmin', ['htmlmin']);
     // make sure uglify has files into uglify, via typescript and babel
     grunt.registerTask('minify', ['clean', 'typescript', 'babel', 'uglify']);
     

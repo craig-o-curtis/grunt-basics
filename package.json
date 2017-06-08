@@ -14,7 +14,9 @@
     "grunt-babel": "^6.0.0",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-htmlmin": "^2.4.0",
     "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-less": "^1.4.1",
     "grunt-contrib-uglify": "^3.0.1",
     "grunt-typescript": "^0.8.0"
   }
