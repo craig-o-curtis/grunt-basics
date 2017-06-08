@@ -1,4 +1,4 @@
-// Demo Project from Pluralsight's Grunt Fundamentals Course
+// Demo Project from Pluralsight's Introduction to Grunt Course
 
 
 // Starting a Grunt project from Scratch
