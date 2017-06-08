@@ -1,1 +1,0 @@
-This file will be deleted if you run 'grunt'

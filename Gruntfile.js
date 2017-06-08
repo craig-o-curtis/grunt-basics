@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
 
     grunt.initConfig({
-        pkg: grunt.file.readJSON(),
+        pkg: grunt.file.readJSON('package.json'),
 
         clean: {
             output: ['ToBeCleaned/*'] // clean everything in this folder
