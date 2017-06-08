@@ -4,16 +4,98 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         clean: {
-            output: ['ToBeCleaned/*'] // clean everything in this folder
+            output: ['dist/*']
+        },
+
+        babel: {
+            options: {
+                sourceMap: true,
+                presets: ['es2015']
+            },
+            dist: {
+                files: {
+                    'dist/es6/index.js': 'src/es6/index.js'
+                }
+            }
+        },
+
+        typescript: {
+            base: {
+                src: ['./src/ts-project/**/*.ts'],
+                dest: './dist/ts/',
+                options: {
+                    module: 'commonjs',
+                    target: 'es5',
+                    rootDir: './src/ts-project',
+                    sourceMap: true,
+                    declaration: true
+                }
+            }
+        },
+
+        // concat: {
+        //     options: {
+        //         separator: ';',
+        //         banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+        // '<%= grunt.template.today("yyyy-mm-dd") %> */',
+        //     },
+        //     dist: {
+        //         src: ['./dist/es6/**/*.js', './dist/ts/**/*.js'],
+        //         dest: './dist/bundle.js'
+        //     }
+        // },
+        
+        jshint: {
+            // beforeconcat: ['./dist/es6/**/*.js', './dist/ts/**/*.js'],
+            // afterconcat:['./dist/es6/**/*.js', './dist/ts/**/*.js'],
+            options: {
+                force: false,
+                curly: true,
+                eqeqeq: true,
+                eqnull: true,
+                browser: true,
+                globals: {  
+                    jQuery: true
+                },
+                esversion: 6
+            },
+            files: ['./src/**/*.js'],
+            uses_defaults: ['./src/**/*.js'],
+            with_overrides: {
+                options: {
+                    curly: false,
+                    undef: true,
+                    force: false
+                },
+                files: {
+                    src: ['./ToBeCleaned/**/*.js']
+                }
+            },
+            ignore_warning: {
+                options: {
+                    '-W015': true
+                },
+                src: ['./src/**/*.js']
+            }
         }
+
     });
 
-    // load the task -- similar to specifying a pipe in Gulpk
-        // specify name of npm grunt plugin
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-babel'); 
+    grunt.loadNpmTasks('grunt-typescript');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-concat');
 
-    // create entry point
-        // arg1 - chosen name of task
-        // arg2 - array of dependency tasks to run - specified above in initConfig
-    grunt.registerTask('default', ['clean']);
-}
+    // must be name of specified plugin property 
+    
+    // grunt.registerTask('typescript');
+    grunt.registerTask('es', ['babel']);
+    grunt.registerTask('ts', ['typescript']);
+    grunt.registerTask('ccat', ['concat']);
+    
+    grunt.registerTask('default', ['clean', 'typescript', 'babel', 'jshint']); // called with grunt || grunt clean
+
+
+
+};
