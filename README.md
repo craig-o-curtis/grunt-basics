@@ -9,8 +9,18 @@ $ npm install --save-dev grunt // creates node_modules dir, package.json
 
 // Grunt Plugins
 * Most official plugins have the grunt-contrib- prefix
+    * grunt-contrib-clean
+    * grunt-contrib-concat
+    * grunt-contrib-jshint
+    * grunt-contrib-uglify
+
+* Other project plugins
+    * grunt-babel
+    * babel-presets-es2015
+    * grunt-typescript
+
 ```
-$ npm install --save-dev grunt-contrib-clean
+$ npm install --save-dev grunt-contrib-clean grunt-contrib-concat grunt-contrib-jshint grunt-contrib-uglify grunt-babel babel-presets-2015 grunt-typescript
 ```
 
 // Verbose mode 
@@ -41,4 +51,4 @@ $ npm install --save-dev grunt-typescript
 
 
 // Validating with JSHint 
-$ npm install --save-dev grunt-contrib-jshint
+

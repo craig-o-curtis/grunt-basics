@@ -45,6 +45,20 @@ module.exports = function(grunt) {
         //     }
         // },
         
+        uglify: {
+            development: {
+                files: [{
+                    expand: true,
+                    cwd: './dist/',
+                    src: '**/*.js',
+                    dest: './dist/'
+                }]
+            },
+            options: {
+                
+            }
+        },
+
         jshint: {
             // beforeconcat: ['./dist/es6/**/*.js', './dist/ts/**/*.js'],
             // afterconcat:['./dist/es6/**/*.js', './dist/ts/**/*.js'],
@@ -54,13 +68,17 @@ module.exports = function(grunt) {
                 eqeqeq: true,
                 eqnull: true,
                 browser: true,
+                "-W069": false,
+                "-W004": false,
                 globals: {  
                     jQuery: true
                 },
-                esversion: 6
+                esversion: 6,
+                ignores: ['./IgnoredJsHint/**/*.js'],
+                reporterOutput: './.jshint-log.txt'
             },
             files: ['./src/**/*.js'],
-            uses_defaults: ['./src/**/*.js'],
+            // uses_defaults: ['./src/**/*.js'],
             with_overrides: {
                 options: {
                     curly: false,
@@ -73,7 +91,7 @@ module.exports = function(grunt) {
             },
             ignore_warning: {
                 options: {
-                    '-W015': true
+                    "-W015": true
                 },
                 src: ['./src/**/*.js']
             }
@@ -86,15 +104,16 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-typescript');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-concat');
-
+    grunt.loadNpmTasks('grunt-contrib-uglify'); 
     // must be name of specified plugin property 
     
     // grunt.registerTask('typescript');
     grunt.registerTask('es', ['babel']);
     grunt.registerTask('ts', ['typescript']);
     grunt.registerTask('ccat', ['concat']);
+    grunt.registerTask('ugg', ['uglify']);
     
-    grunt.registerTask('default', ['clean', 'typescript', 'babel', 'jshint']); // called with grunt || grunt clean
+    grunt.registerTask('default', ['clean', 'typescript', 'babel', 'jshint', 'uglify']); // called with grunt || grunt clean
 
 
 
