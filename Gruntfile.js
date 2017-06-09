@@ -136,6 +136,7 @@ module.exports = function(grunt) {
         less: {
             development: {
                 options: {
+                    // csslintrc: 'abstracted-css-rules.json'
                     sourceMap: true,
                     cleancss: false,
                     compress: false,
@@ -154,6 +155,7 @@ module.exports = function(grunt) {
             },
             production: {
                 options: {
+                    // csslintrc: 'abstracted-css-rules.json'
                     sourceMap: false,
                     expand: false,
                     cleancss: true,
@@ -273,6 +275,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
+
+    // reloading and watching
+    grunt.loadNpmTasks('grunt-contrib-watch');
     
     /** Registered Tasks **/
     grunt.registerTask('es', ['babel']);
