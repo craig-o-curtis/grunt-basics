@@ -148,3 +148,11 @@ $ npm install --save-dev grunt-typescript
 // Minifying HTML with grunt-contrib-htmlmin
     - remove comments and whitespace + tags
     - remove reduntant tags
+
+
+
+
+***** PROBLEMS
+Need to replace link and script tags in dist to match new bundled paths
+
+Need to concat files together

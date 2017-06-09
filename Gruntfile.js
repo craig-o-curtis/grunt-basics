@@ -154,22 +154,21 @@ module.exports = function(grunt) {
         },
 
         htmlmin: {
-            dist: {
-                options: {
-                    removeComments: false,
-                    collapseWhitespace: true
-                },
-                files: {
-                    './dist/index.html': './.src/**/index.html',
-                }
-            },
             dev: {
+                options: {
+                    collapseInlineTagWhitespace: true,
+                    collapseWhitespace: true,
+                    conservativeCollapse: true,
+                    removeEmptyAttributes: true,
+                    removeEmptyElements: true,
+                    removeRedundantAttributes: true,
+                    removeOptionalTags: true
+                },
                 files: [{
                     expand: true,
                     cwd: './src',
-                    src: ['./src/**.*.html', '*.html'],
+                    src: ['**/*.html'],
                     dest: './dist'
-                    // './dist/index.html': './src/index.html'
                 }]
             }
         },
@@ -224,7 +223,18 @@ module.exports = function(grunt) {
     // make sure uglify has files into uglify, via typescript and babel
     grunt.registerTask('minify', ['clean', 'typescript', 'babel', 'uglify']);
     
-    grunt.registerTask('default', ['clean', 'copy', 'typescript', 'babel', 'jshint', 'uglify']); // called with grunt || grunt clean
+    grunt.registerTask('default', [
+        'clean',
+        'copy',
+        'typescript',
+        'babel',
+        'jshint',
+        'uglify',
+        'less',
+        'htmlhint',
+        'htmlmin'
+    ]); // called with grunt || grunt clean
+
     // 1. Remove all files from dist
     // 2. copy over the vendor files
     // 3. compile the typescript
