@@ -62,12 +62,36 @@ $ grunt copy
 ```
 
 
+## Test Grunt's HTML Linter
+```
+$ grunt htmlhint
+```
+
+
+## Test Grunt's CSS Linter
+```
+$ grunt csslint
+$ grunt csslint:strict
+$ grunt csslint:laxed
+```
+
+
 ## Test Grunt's JS Hint Linter
 Before - see ./src/** && ./IgnoredJsHint/**
 After - see ./src/** && ./IgnoredJsHint/** && ./.jshint-log.txt
 ```
 $ grunt jshint
 ```
+
+## Test Grunt's LESS Transpiler
+Before - see src/less/
+After - see dist/styles/
+```
+$ grunt less
+$ grunt less:development
+$ grunt less:production
+```
+
 
 
 ## Test Grunt's Babel Transpiler
@@ -84,6 +108,8 @@ After - see ./dist/ts/
 ```
 $ grunt ts || grunt typescript
 ```
+
+
 
 
 ## Test Grunt's File / Directory Cleaner
@@ -110,11 +136,8 @@ $ grunt clean
     ```
     Call with : 
     ```
-    $ grunt clean:styles
+    $ grunt clean:html || clean:css || clean:js
     ```
-
-
-
 
 
 

@@ -59,6 +59,27 @@ module.exports = function(grunt) {
             } 
         },
 
+        // needs to read css, so readying dest folder
+        csslint: {
+            strict: {
+                options: {
+                    "zero-units": true,
+                    "ids": true,
+                    "order-alphabetical": true,
+                },
+                src: ['./dist/styles/**/*.css']
+            },
+            laxed: {
+                options: {
+                    "zero-units": false,
+                    "ids": false,
+                    "order-alphabetical": false,
+
+                },
+                src: ['./dist/styles/**/*.css']
+            }
+        },
+
         jshint: {
             // beforeconcat: ['./dist/es6/**/*.js', './dist/ts/**/*.js'],
             // afterconcat:['./dist/es6/**/*.js', './dist/ts/**/*.js'],
@@ -116,8 +137,8 @@ module.exports = function(grunt) {
             development: {
                 options: {
                     sourceMap: true,
-                    cleancss: true,
-                    compress: true,
+                    cleancss: false,
+                    compress: false,
                     paths: ['./src/less']
                 },
                 files: [{
@@ -133,6 +154,7 @@ module.exports = function(grunt) {
             },
             production: {
                 options: {
+                    sourceMap: false,
                     expand: false,
                     cleancss: true,
                     compress: true,
@@ -141,7 +163,9 @@ module.exports = function(grunt) {
                         new (require('less-plugin-autoprefix'))({browsers: ['last 2 versions']}),
                         new (require('less-plugin-clean-css'))({})
                     ],
-                    modifyVars: {},
+                    modifyVars: {
+                        // can change LESS vars for prod builds
+                    },
                 },
                 files: {
                     './dist/styles/bundle.css': './src/less/index.less'
@@ -236,7 +260,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     // linting
     grunt.loadNpmTasks('grunt-htmlhint');
-    grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     // moving
     grunt.loadNpmTasks('grunt-contrib-copy'); 
@@ -244,6 +267,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-typescript');
     grunt.loadNpmTasks('grunt-babel'); 
     grunt.loadNpmTasks('grunt-contrib-less');
+    // lint after output css
+    grunt.loadNpmTasks('grunt-contrib-csslint'); 
     // minifying
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -269,6 +294,7 @@ module.exports = function(grunt) {
         'typescript',
         'babel',
         'less',
+        'csslint',
         // minify
         'htmlmin',
         'uglify'
