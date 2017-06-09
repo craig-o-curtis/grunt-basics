@@ -1,0 +1,1 @@
+"use strict";var button=document.querySelectorAll("button");button.click(function(t){console.log(t)});

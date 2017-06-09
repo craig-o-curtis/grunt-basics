@@ -5,13 +5,39 @@ module.exports = function(grunt) {
 
         clean: {
             // output: ['dist/*']
-            options: {},
+            options: {
+
+            },
             files: ['./dist/*'],
             // './dist/*' keeps dist folder, 
             // './dist/**' removes dist folder
             folders: ['./dist/es6', './dist/ts'] // redundant way to delete folders
         },
- 
+
+        // for vendor, no need to minify
+        copy: {
+            main: {
+                files: [
+                // includes files within path  /vendor/*
+                    {
+                        expand: true,
+                        cwd: './src',
+                        src: ['./vendor/**'],
+                        dest: './dist',
+                        // filter: 'isFile'
+                    },
+                // includes files within path and its sub-directories 
+                // {expand: true, src: ['path/**'], dest: 'dest/'},
+            
+                // makes all src relative to cwd 
+                // {expand: true, cwd: 'path/', src: ['**'], dest: 'dest/'},
+            
+                // flattens results to a single level 
+                // {expand: true, flatten: true, src: ['path/**'], dest: 'dest/', filter: 'isFile'},
+                ],
+            },
+        },
+
         babel: {
             options: {
                 sourceMap: true,
@@ -55,7 +81,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: './dist/',
-                    src: '**/*.js',
+                    src: ['**/*.js', '!'],
                     dest: './dist/'
                 }]
             },
@@ -87,7 +113,7 @@ module.exports = function(grunt) {
                 reporterOutput: './.jshint-log.txt'
             },
             files: ['./src/**/*.js'],
-            // uses_defaults: ['./src/**/*.js'],
+            uses_defaults: ['./src/**/*.js'],
             with_overrides: {
                 options: {
                     curly: false,
@@ -160,11 +186,13 @@ module.exports = function(grunt) {
     });
 
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-copy'); 
     grunt.loadNpmTasks('grunt-babel'); 
     grunt.loadNpmTasks('grunt-typescript');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-htmlhint');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-less');
     // must be name of specified plugin property 
