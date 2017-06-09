@@ -20,6 +20,7 @@ $ npm install --save-dev grunt // creates node_modules dir, package.json
     * grunt-contrib-less
     * grunt-contrib-csslint
     * grunt-contrib-cssmin
+    * grunt-contrib-watch
 
 * Other project plugins
     * grunt-babel

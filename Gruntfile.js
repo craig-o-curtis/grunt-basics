@@ -123,6 +123,36 @@ module.exports = function(grunt) {
             }
         },
 
+        htmlhint: {
+            templates: {
+                options: {
+                    'alt-require': true,
+                    'attr-lowercase': true,
+                    'attr-no-duplication': true,
+                    'attr-unsafe-chars': true,
+                    'attr-value-not-empty': true,
+                    'doctype-first': true,
+                    'doctype-html5': true,
+                    'head-script-disabled': true,
+                    'href-abs-or-rel': false,
+                    'id-class-ad-disabled': true,
+                    'id-class-value': 'dash',
+                    'id-unique': true,
+                    'inline-script-disabled': true,
+                    'inline-style-disabled': true,
+                    'space-tab-mixed-disabled': 'space2',
+                    'spec-char-escape': true,
+                    'src-not-empty': true,
+                    'style-disabled': true,
+                    'tag-pair': true,
+                    'tag-self-clos': false,
+                    'tagname-lowercase': true,
+                    // 'title-require': SVGFETurbulenceElement
+                },
+                src: ['./src/**/*.html']
+            }
+        },
+
         htmlmin: {
             dist: {
                 options: {
@@ -142,10 +172,6 @@ module.exports = function(grunt) {
                     // './dist/index.html': './src/index.html'
                 }]
             }
-        },
-
-        htmlhint: {
-
         },
 
         less: {
@@ -176,6 +202,7 @@ module.exports = function(grunt) {
 
     });
 
+    /** Load NPM Tasks **/
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy'); 
     grunt.loadNpmTasks('grunt-babel'); 
@@ -186,9 +213,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-htmlhint');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-less');
-    // must be name of specified plugin property 
+    grunt.loadNpmTasks('grunt-contrib-csslint');
     
-    // grunt.registerTask('typescript');
+    /** Registered Tasks **/
     grunt.registerTask('es', ['babel']);
     grunt.registerTask('ts', ['typescript']);
     grunt.registerTask('ccat', ['concat']);
