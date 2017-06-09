@@ -141,16 +141,16 @@ module.exports = function(grunt) {
                     'inline-script-disabled': true,
                     'inline-style-disabled': true,
                     'space-tab-mixed-disabled': 'space2',
-                    'spec-char-escape': true,
+                    'spec-char-escape': false,
                     'src-not-empty': true,
                     'style-disabled': true,
                     'tag-pair': true,
-                    'tag-self-clos': false,
+                    'tag-self-close': true,
                     'tagname-lowercase': true,
                     // 'title-require': SVGFETurbulenceElement
                 },
                 src: ['./src/**/*.html']
-            }
+            } 
         },
 
         htmlmin: {
