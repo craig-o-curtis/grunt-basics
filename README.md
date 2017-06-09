@@ -52,6 +52,15 @@ $ grunt clean -v
 
 # Grunt Demos
 
+
+## Test Grunt's Copier
+Before - see src/vendor/
+After - see dist/vendor/
+```
+$ grunt copy
+```
+
+
 ## Test Grunt's JS Hint Linter
 Before - see ./src/** && ./IgnoredJsHint/**
 After - see ./src/** && ./IgnoredJsHint/** && ./.jshint-log.txt

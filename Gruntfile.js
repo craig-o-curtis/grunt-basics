@@ -18,36 +18,15 @@ module.exports = function(grunt) {
         copy: {
             main: {
                 files: [
-                // includes files within path  /vendor/*
                     {
                         expand: true,
                         cwd: './src',
                         src: ['./vendor/**'],
                         dest: './dist',
                         // filter: 'isFile'
-                    },
-                // includes files within path and its sub-directories 
-                // {expand: true, src: ['path/**'], dest: 'dest/'},
-            
-                // makes all src relative to cwd 
-                // {expand: true, cwd: 'path/', src: ['**'], dest: 'dest/'},
-            
-                // flattens results to a single level 
-                // {expand: true, flatten: true, src: ['path/**'], dest: 'dest/', filter: 'isFile'},
+                    }
                 ],
             },
-        },
-
-        babel: {
-            options: {
-                sourceMap: true,
-                presets: ['es2015']
-            },
-            dist: {
-                files: {
-                    'dist/es6/index.js': 'src/es6/index.js'
-                }
-            }
         },
 
         typescript: {
@@ -64,6 +43,18 @@ module.exports = function(grunt) {
             }
         },
 
+        babel: {
+            options: {
+                sourceMap: true,
+                presets: ['es2015']
+            },
+            dist: {
+                files: {
+                    'dist/es6/index.js': 'src/es6/index.js'
+                }
+            }
+        },
+
         // concat: {
         //     options: {
         //         separator: ';',
@@ -76,24 +67,6 @@ module.exports = function(grunt) {
         //     }
         // },
         
-        uglify: {
-            development: {
-                files: [{
-                    expand: true,
-                    cwd: './dist/',
-                    src: ['**/*.js', '!'],
-                    dest: './dist/'
-                }]
-            },
-            options: {
-                mangle: true, // false to toggle to keep original var names
-                compress: {
-                    drop_console: false // would remove console's in code, but we should remove them manually
-                },
-                beautify: false // set to true to reverse uglify
-            }
-        },
-
         jshint: {
             // beforeconcat: ['./dist/es6/**/*.js', './dist/ts/**/*.js'],
             // afterconcat:['./dist/es6/**/*.js', './dist/ts/**/*.js'],
@@ -109,7 +82,7 @@ module.exports = function(grunt) {
                     jQuery: true
                 },
                 esversion: 6,
-                ignores: ['./IgnoredJsHint/**/*.js'],
+                ignores: ['./IgnoredJsHint/**/*.js', './src/vendor/**/*.js'],
                 reporterOutput: './.jshint-log.txt'
             },
             files: ['./src/**/*.js'],
@@ -129,6 +102,24 @@ module.exports = function(grunt) {
                     "-W015": true
                 },
                 src: ['./src/**/*.js']
+            }
+        },
+
+        uglify: {
+            development: {
+                files: [{
+                    expand: true,
+                    cwd: './dist/',
+                    src: ['**/*.js', '!'],
+                    dest: './dist/'
+                }]
+            },
+            options: {
+                mangle: true, // false to toggle to keep original var names
+                compress: {
+                    drop_console: false // would remove console's in code, but we should remove them manually
+                },
+                beautify: false // set to true to reverse uglify
             }
         },
 
@@ -206,7 +197,12 @@ module.exports = function(grunt) {
     // make sure uglify has files into uglify, via typescript and babel
     grunt.registerTask('minify', ['clean', 'typescript', 'babel', 'uglify']);
     
-    grunt.registerTask('default', ['clean', 'typescript', 'babel', 'jshint', 'uglify']); // called with grunt || grunt clean
+    grunt.registerTask('default', ['clean', 'copy', 'typescript', 'babel', 'jshint', 'uglify']); // called with grunt || grunt clean
+    // 1. Remove all files from dist
+    // 2. copy over the vendor files
+    // 3. compile the typescript
+    // 4. compile the es6
+    // 5. check dist for js errors, ignoring vendor files
 
 
 
