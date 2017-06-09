@@ -139,6 +139,21 @@ module.exports = function(grunt) {
                 files: {
                     './dist/styles/bundle.css': './src/less/**/*.less'
                 }
+            },
+            production: {
+                options: {
+                    paths: ['./src/less'],
+                    plugins: [
+                        new (require('less-plugin-autoprefix'))({browsers: ['last 2 versions']}),
+                        new (require('less-plugin-clean-css'))({})
+                    ],
+                    modifyVars: {
+
+                    },
+                    files: {
+                        './dist/styles/bundle.css': './src/less/*.less'
+                    }
+                }
             }
         }
 

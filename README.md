@@ -23,9 +23,11 @@ $ npm install --save-dev grunt // creates node_modules dir, package.json
     * babel-presets-es2015
     * grunt-typescript
     * grunt htmlhint
+    * less-plugin-autoprefix
+    * less-plugin-clean-css
 
 ```
-$ npm install --save-dev grunt-contrib-clean grunt-contrib-concat grunt-contrib-jshint grunt-contrib-uglify grunt-contrib-htmlmin grunt-babel babel-presets-2015 grunt-typescript grunt-htmlhintd
+$ npm install --save-dev grunt-contrib-clean grunt-contrib-concat grunt-contrib-jshint grunt-contrib-uglify grunt-contrib-htmlmin grunt-babel babel-presets-2015 grunt-typescript grunt-htmlhintd less-plugin-autoprefix less-plugin-clean-css
 ```
 
 // Connect to the Grunt Plugins in the node_modules folder
