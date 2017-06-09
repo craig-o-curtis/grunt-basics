@@ -99,6 +99,24 @@ $ grunt clean
     // redundant way to delete folders
         folders: ['./dist/es6', './dist/ts'] 
 
+    // Customization
+    add new task:
+    ```
+        // custom command to clean styles
+        styles: {
+            options: {'no-write':false},
+            src: ['./dist/styles/*']
+        },
+    ```
+    Call with : 
+    ```
+    $ grunt clean:styles
+    ```
+
+
+
+
+
 
 ## Test Grunt's File Concatenator
 Before - see ./dist/**
