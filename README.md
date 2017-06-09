@@ -1,15 +1,15 @@
-// Demo Project from Pluralsight's Introduction to Grunt  Course
+# Demo Project from Pluralsight's Introduction to Grunt  Course
 NOTE - due to the demo projects not being on Github, this is more of a piec ework demo of grunt rather than a fully-functional app with grunt as the automation / build process.
 
 
-// Starting a Grunt project from Scratch
+## Starting a Grunt project from Scratch
 ```
 $ npm init // npm >=5.0.0 creaktes package-lock.json
 $ npm install --save-dev grunt // creates node_modules dir, package.json
 ```
 
 
-// Grunt Plugins
+## Grunt Plugins
 * Most official plugins have the grunt-contrib- prefix
     * grunt-contrib-clean
     * grunt-contrib-copy
