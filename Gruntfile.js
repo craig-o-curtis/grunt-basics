@@ -131,7 +131,7 @@ module.exports = function(grunt) {
                     'attr-no-duplication': true,
                     'attr-unsafe-chars': true,
                     'attr-value-not-empty': true,
-                    'doctype-first': true,
+                    'doctype-first': false, // for templates
                     'doctype-html5': true,
                     'head-script-disabled': true,
                     'href-abs-or-rel': false,
@@ -145,7 +145,7 @@ module.exports = function(grunt) {
                     'src-not-empty': true,
                     'style-disabled': true,
                     'tag-pair': true,
-                    'tag-self-close': true,
+                    'tag-self-close': false, // for meta, link, input, img tags
                     'tagname-lowercase': true,
                     // 'title-require': SVGFETurbulenceElement
                 },
