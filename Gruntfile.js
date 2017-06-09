@@ -115,13 +115,15 @@ module.exports = function(grunt) {
         less: {
             development: {
                 options: {
-                    expand: true,
                     sourceMap: true,
+                    cleancss: true,
+                    compress: true,
                     paths: ['./src/less']
                 },
                 files: [{
                     expand: true,
                     flatten: true,
+                    
                     cwd: './src/',
                     src: ['**/*.less', '!**/index.less'],
                     dest: './dist/styles',
@@ -132,6 +134,8 @@ module.exports = function(grunt) {
             production: {
                 options: {
                     expand: false,
+                    cleancss: true,
+                    compress: true,
                     paths: ['./src/less'],
                     plugins: [
                         new (require('less-plugin-autoprefix'))({browsers: ['last 2 versions']}),
