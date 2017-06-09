@@ -51,6 +51,8 @@ grunt.registerTask('ts', ['typescript']);
 $ grunt default\ -v
 $ grunt clean -v
 
+
+
 # Grunt Demos
 
 
@@ -60,6 +62,10 @@ After - see dist/vendor/
 ```
 $ grunt copy
 ```
+
+/** Linters **/
+Can be specified inline, as in project
+or in separate rc files -- see .csslintrc.json, .htmlhintrc.json, and of course, .jshintrc
 
 
 ## Test Grunt's HTML Linter
