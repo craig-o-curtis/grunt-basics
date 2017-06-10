@@ -1,5 +1,6 @@
+var fs = require('fs');
+
 module.exports = function(grunt) {
-    var fs = require('fs');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
