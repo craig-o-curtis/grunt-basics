@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+    var fs = require('fs');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -252,6 +253,13 @@ module.exports = function(grunt) {
                 },
                 beautify: false // set to true to reverse uglify
             }
+        },
+
+        // custome tasks
+        checkFileSize: {
+            options: {
+               folderToScan: './src/less' 
+            }
         }
 
     });
@@ -304,5 +312,27 @@ module.exports = function(grunt) {
         'htmlmin',
         'uglify'
     ]); // called with grunt || grunt clean
+
+
+    // Custom Grunt Tasks
+    grunt.registerTask('checkFileSize', 'Task to check file size', checkFileSize);
+
+    function checkFileSize(debug) {
+        var options = this.options({
+            folderToScan: ''
+        });
+
+        if ( this.args.length !== 0 && debug !== undefined) {
+            grunt.log.writeflags(options, 'Options');
+        }
+
+        grunt.file.recurse(options.folderToScan, function(abspath, rootdir, subdir, filename){
+            if (grunt.file.isFile(abspath)) {
+                var state = fs.statSync(abspath);
+                var asBytes = state.size / 1024;
+                grunt.log.writeln('Found file %s with size of %s kb', filename, asBytes);
+            }
+        });
+    }
 
 };

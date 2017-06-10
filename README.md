@@ -46,10 +46,10 @@ grunt.registerTask('ts', ['typescript']);
 
 
 
-// Verbose mode 
+// Verbose mode r
 * Add a -v flag to run grunt in verbose mode
 $ grunt default\ -v
-$ grunt clean -v
+$ grunt clean -v 
 
 
 
@@ -203,3 +203,39 @@ $ npm install --save-dev grunt-typescript
 Need to replace link and script tags in dist to match new bundled paths
 
 Need to concat files together
+
+
+
+## Custom Tasks
+Example
+```
+    ...
+        // custome tasks
+        checkFileSize: {
+            options: {
+               folderToScan: './src/less' 
+            }
+        }
+    ...
+
+
+    grunt.registerTask('checkFileSize', 'Task to check file size', checkFileSize);
+
+    function checkFileSize(debug) {
+        var options = this.options({
+            folderToScan: ''
+        });
+
+        if ( this.args.length !== 0 && debug !== undefined) {
+            grunt.log.writeflags(options, 'Options');
+        }
+
+        grunt.file.recurse(options.folderToScan, function(abspath, rootdir, subdir, filename){
+            if (grunt.file.isFile(abspath)) {
+                var state = fs.statSync(abspath);
+                var asBytes = state.size / 1024;
+                grunt.log.writeln('Found file %s with size of %s kb', filename, asBytes);
+            }
+        });
+    }
+```
